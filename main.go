@@ -1,9 +1,7 @@
 package main
 
 import (
-	//"bytes"
 	"fmt"
-	//stats "google.golang.org/grpc/benchmark/stats"
 	"io/ioutil"
 	"log"
 	"os"
@@ -55,6 +53,9 @@ func main() {
 	for _, x := range data {
 		stat.Add(int(x))
 	}
-	fmt.Println(stat.Buckets)
-	fmt.Println(stat.TotalBytes())
+	for _, result := range stat.Buckets {
+		fmt.Println("Bucket: " + fmt.Sprint(result.Value) + " | " + fmt.Sprint(result.Counter))
+	}
+	total, _ := stat.TotalBytes()
+	fmt.Println("Total bytes hashed: " + fmt.Sprint(total))
 }
